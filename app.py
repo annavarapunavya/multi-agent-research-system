@@ -14,12 +14,21 @@ if not gemini_api_key:
 
 llm = LLM(
     model="gemini/gemini-3.5-flash",
-    api_key = gemini_api_key,
-    temperature = 0.2
+    api_key=gemini_api_key,
+    temperature=0.2,
 )
 
 research_agent = create_research_agent(llm)
-topic = input("\nEnter a research topic: ")
+
+print("=" * 60)
+print("🤖 Multi-Agent Research System")
+print("=" * 60)
+
+topic = input("\nEnter a research topic: ").strip()
+
+if not topic:
+    raise ValueError("Research topic cannot be empty.")
+
 research_task = create_research_task(
     research_agent,
     topic
@@ -33,7 +42,22 @@ crew = Crew(
 
 result = crew.kickoff()
 
+# Create output folder if it doesn't exist
+os.makedirs("output", exist_ok=True)
+
+# Generate filename
+file_name = topic.replace(" ", "_") + "_Report.md"
+
+# Create full file path
+output_path = os.path.join("output", file_name)
+
+# Save report
+with open(output_path, "w", encoding="utf-8") as file:
+    file.write(str(result))
+
 print("\n" + "=" * 60)
-print("RESEARCH REPORT")
+print("✅ Research Completed")
 print("=" * 60)
-print(result)
+print(f"📄 Report saved successfully: {output_path}")
+print("\nPreview (first 500 characters):\n")
+print(str(result)[:500] + "...")
