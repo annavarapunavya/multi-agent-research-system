@@ -4,9 +4,11 @@ import os
 from crewai import Crew, Task, LLM
 from agents.research_agent import create_research_agent
 from agents.writer_agent import create_writer_agent
+from agents.fact_checker_agent import create_fact_checker_agent
 
 from tasks.research_task import create_research_task
 from tasks.writing_task import create_writing_task
+from tasks.fact_check_task import create_fact_check_task
 from utils.file_handler import save_report
 
 load_dotenv()
@@ -24,6 +26,7 @@ llm = LLM(
 
 research_agent = create_research_agent(llm)
 writer_agent = create_writer_agent(llm)
+fact_checker_agent = create_fact_checker_agent(llm)
 
 print("=" * 60)
 print("🤖 Multi-Agent Research System")
@@ -44,17 +47,22 @@ writing_task = create_writing_task(
     research_task
 )
 
+fact_check_task = create_fact_check_task(
+    fact_checker_agent,
+    writing_task
+)
+
 crew = Crew(
     agents=[
         research_agent,
-        writer_agent
+        writer_agent,
+        fact_checker_agent
     ],
-
     tasks=[
         research_task,
-        writing_task
+        writing_task,
+        fact_check_task
     ],
-
     verbose=True
 )
 

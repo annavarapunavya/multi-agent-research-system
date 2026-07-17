@@ -1,4 +1,5 @@
 from crewai import Agent
+#from tools.search_tool import search_tool
 
 def create_research_agent(llm):
     return Agent(
@@ -10,5 +11,6 @@ def create_research_agent(llm):
     "identifying key insights, and presenting findings in a clear, structured, "
     "and unbiased manner."),
     llm = llm,
+    #tools=[search_tool],
     verbose = True
     )
