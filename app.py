@@ -3,7 +3,11 @@ import os
 
 from crewai import Crew, Task, LLM
 from agents.research_agent import create_research_agent
+from agents.writer_agent import create_writer_agent
+
 from tasks.research_task import create_research_task
+from tasks.writing_task import create_writing_task
+from utils.file_handler import save_report
 
 load_dotenv()
 
@@ -19,6 +23,7 @@ llm = LLM(
 )
 
 research_agent = create_research_agent(llm)
+writer_agent = create_writer_agent(llm)
 
 print("=" * 60)
 print("🤖 Multi-Agent Research System")
@@ -34,26 +39,28 @@ research_task = create_research_task(
     topic
 )
 
+writing_task = create_writing_task(
+    writer_agent,
+    research_task
+)
+
 crew = Crew(
-    agents=[research_agent],
-    tasks=[research_task],
+    agents=[
+        research_agent,
+        writer_agent
+    ],
+
+    tasks=[
+        research_task,
+        writing_task
+    ],
+
     verbose=True
 )
 
 result = crew.kickoff()
 
-# Create output folder if it doesn't exist
-os.makedirs("output", exist_ok=True)
-
-# Generate filename
-file_name = topic.replace(" ", "_") + "_Report.md"
-
-# Create full file path
-output_path = os.path.join("output", file_name)
-
-# Save report
-with open(output_path, "w", encoding="utf-8") as file:
-    file.write(str(result))
+output_path = save_report(topic, result)
 
 print("\n" + "=" * 60)
 print("✅ Research Completed")
