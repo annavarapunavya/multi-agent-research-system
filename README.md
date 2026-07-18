@@ -206,7 +206,7 @@ python -m streamlit run streamlit_app.py
 
 ### AI Agents Working
 
-![Processing](images/processing(2).png)
+![Processing](images/processing).png)
 
 ### Output 
 ![output after processing](images/output.png)
