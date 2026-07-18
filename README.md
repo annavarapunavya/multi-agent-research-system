@@ -6,6 +6,11 @@ Built using **CrewAI**, an LLM integration layer, **Google Gemini**, and **Strea
 
 ---
 
+![Python](https://img.shields.io/badge/Python-3.10-blue?logo=python)
+![CrewAI](https://img.shields.io/badge/CrewAI-Agentic_AI-purple)
+![Streamlit](https://img.shields.io/badge/Streamlit-Web_App-red?logo=streamlit)
+![License](https://img.shields.io/badge/License-MIT-green)
+
 ## 🚀 Features
 
 - 🔍 Research topics using a dedicated AI Research Agent
@@ -18,6 +23,10 @@ Built using **CrewAI**, an LLM integration layer, **Google Gemini**, and **Strea
 
 ---
 
+```
+- 🧠 Role-based AI agents with specialized responsibilities
+- 🔄 Sequential task orchestration using CrewAI
+```
 ## 🏗️ System Architecture
 
 ```
@@ -76,7 +85,7 @@ multi-agent-research-system/
 ├── app.py
 ├── streamlit_app.py
 ├── requirements.txt
-├── .env
+├── .env.example
 └── README.md
 ```
 
@@ -114,7 +123,7 @@ multi-agent-research-system/
 Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/annavarapunavya/multi-agent-research-system.git
 cd multi-agent-research-system
 ```
 
@@ -197,7 +206,7 @@ python -m streamlit run streamlit_app.py
 
 ### AI Agents Working
 
-![Processing](images/processing.png)
+![Processing](images/processing(2).png)
 
 ### Output 
 ![output after processing](images/output.png)
