@@ -1,165 +1,141 @@
-# 🤖 Multi-Agent Research System with CrewAI
+# 🤖 AI Multi-Agent Research & Report Generation System
 
-A modular **Agentic AI** application built using **CrewAI** and **Google Gemini** that demonstrates **multi-agent collaboration**, **role-based agent design**, and **task orchestration**.
+An AI-powered research assistant that leverages a multi-agent workflow to research a topic, generate a structured report, and verify its accuracy before producing the final output.
 
-This project showcases how specialized AI agents can collaborate to perform research tasks and generate structured reports. It is designed as a portfolio project to demonstrate practical Agentic AI concepts used in modern AI applications.
-
----
-
-# 🚀 Features
-
-### ✅ Current Features (Version 1.0)
-
-- Research Agent powered by Gemini
-- Modular Agent & Task architecture
-- CrewAI workflow orchestration
-- Generates structured research reports
-- Environment variable management using `.env`
-- Clean project structure following software engineering principles
+Built using **CrewAI**, an LLM integration layer, **Google Gemini**, and **Streamlit** to orchestrate specialized AI agents that collaborate to produce high-quality research reports.
 
 ---
 
-# 🛠 Planned Features
+## 🚀 Features
 
-- 🔄 Interactive topic input
-- ✍️ Writer Agent
-- ✅ Fact Checker Agent
-- 🌐 Web Search Tool Integration
-- 📄 Markdown report generation
-- 📑 PDF export
-- 🖥 Streamlit Web Interface
-- 💾 Research history
-- 🔍 Multi-agent collaboration workflow
+- 🔍 Research topics using a dedicated AI Research Agent
+- ✍️ Generate well-structured reports with a Writer Agent
+- ✅ Verify generated content using a Fact Checker Agent
+- 🤝 Sequential multi-agent collaboration using CrewAI
+- 📄 Automatically generate Markdown research reports
+- 🌐 Interactive Streamlit web interface
+- 📥 Download generated reports
 
 ---
 
-# 📂 Project Structure
+## 🏗️ System Architecture
 
-```text
+```
+                User
+                  │
+                  ▼
+         Streamlit Web UI
+                  │
+                  ▼
+           run_research()
+                  │
+                  ▼
+      ┌───────────────────────┐
+      │   Research Agent      │
+      └───────────────────────┘
+                  │
+                  ▼
+      ┌───────────────────────┐
+      │    Writer Agent       │
+      └───────────────────────┘
+                  │
+                  ▼
+      ┌───────────────────────┐
+      │  Fact Checker Agent   │
+      └───────────────────────┘
+                  │
+                  ▼
+        Markdown Research Report
+```
+
+---
+
+## 📂 Project Structure
+
+```
 multi-agent-research-system/
 │
 ├── agents/
-│   └── research_agent.py
+│   ├── research_agent.py
+│   ├── writer_agent.py
+│   └── fact_checker_agent.py
 │
 ├── tasks/
-│   └── research_task.py
+│   ├── research_task.py
+│   ├── writing_task.py
+│   └── fact_check_task.py
+│
+├── tools/
+│   └── search_tool.py
+│
+├── utils/
+│   └── file_handler.py
 │
 ├── output/
 │
 ├── app.py
-├── .env
-├── .gitignore
+├── streamlit_app.py
 ├── requirements.txt
+├── .env
 └── README.md
 ```
 
 ---
 
-# 🧠 System Architecture
+## 🧠 AI Agents
 
-```text
-                 User
-                   │
-                   ▼
-          Research Topic
-                   │
-                   ▼
-           Research Task
-                   │
-                   ▼
-       Senior AI Research Agent
-                   │
-                   ▼
-            CrewAI Orchestrator
-                   │
-                   ▼
-        Google Gemini 3.5 Flash
-                   │
-                   ▼
-         Structured Research Report
-```
+### 🔍 Research Agent
+- Conducts comprehensive research on the given topic
+- Collects relevant facts and supporting information
+
+### ✍️ Writer Agent
+- Organizes research findings
+- Produces a structured and readable report
+
+### ✅ Fact Checker Agent
+- Reviews the generated report
+- Corrects inconsistencies and improves factual accuracy
 
 ---
 
-# ⚙️ Tech Stack
+## 🛠️ Tech Stack
 
-| Technology | Purpose |
-|------------|---------|
-| Python | Programming Language |
-| CrewAI | Multi-Agent Framework |
-| Google Gemini API | Large Language Model |
-| LiteLLM | LLM Integration Layer |
-| python-dotenv | Environment Variable Management |
-| Git & GitHub | Version Control |
+- Python
+- CrewAI
+- Google Gemini
+- LiteLLM
+- Streamlit
+- python-dotenv
 
 ---
 
-# 🏗 Software Engineering Concepts Used
-
-- Agentic AI
-- Multi-Agent Systems
-- Role-Based Agent Design
-- Task Orchestration
-- Dependency Injection
-- Modular Programming
-- Single Responsibility Principle (SRP)
-- Environment Variable Management
-- Version Control using Git
-
----
-
-# 👨‍💻 Current Workflow
-
-```text
-Load Environment Variables
-          │
-          ▼
-Create Gemini LLM
-          │
-          ▼
-Create Research Agent
-          │
-          ▼
-Create Research Task
-          │
-          ▼
-Create Crew
-          │
-          ▼
-Crew Kickoff
-          │
-          ▼
-Generate Research Report
-```
-
----
-
-# ▶️ Installation
+## ⚙️ Installation
 
 Clone the repository
 
 ```bash
-git clone https://github.com/annavarapunavya/multi-agent-research-system.git
-```
-
-Move into the project
-
-```bash
+git clone <repository-url>
 cd multi-agent-research-system
 ```
 
-Create Virtual Environment
+Create a virtual environment
 
 ```bash
 python -m venv venv
 ```
 
-Activate Virtual Environment
+Activate the environment
 
 ### Windows
 
 ```bash
 venv\Scripts\activate
+```
+
+### Linux / macOS
+
+```bash
+source venv/bin/activate
 ```
 
 Install dependencies
@@ -168,103 +144,75 @@ Install dependencies
 pip install -r requirements.txt
 ```
 
----
-
-# 🔑 Environment Variables
-
-Create a `.env` file in the project root.
+Create a `.env` file
 
 ```env
-GEMINI_API_KEY=YOUR_API_KEY
+GEMINI_API_KEY=your_api_key
 ```
 
 ---
 
-# ▶️ Run the Project
+## ▶️ Run the Application
+
+### Terminal Version
 
 ```bash
 python app.py
 ```
 
----
+### Streamlit Version
 
-# 📌 Current Output
-
-The application generates a structured research report for the given topic using the Research Agent.
-
-Example topic:
-
-```
-Explainable AI
+```bash
+python -m streamlit run streamlit_app.py
 ```
 
-Output includes:
+---
 
-- Introduction
-- Key Concepts
-- Applications
-- Advantages
-- Challenges
-- Recent Developments
-- Conclusion
+## 📄 Sample Workflow
+
+1. Enter a research topic.
+2. Research Agent gathers information.
+3. Writer Agent generates a structured report.
+4. Fact Checker reviews and refines the report.
+5. Download the final Markdown report.
 
 ---
 
-# 📈 Roadmap
+## 🎯 Future Improvements
 
-- [x] Setup CrewAI Project
-- [x] Configure Gemini API
-- [x] Create Research Agent
-- [x] Create Research Task
-- [x] CrewAI Integration
-- [x] Generate Research Report
-- [x] Interactive Topic Input
-- [ ] Writer Agent
-- [ ] Fact Checker Agent
-- [ ] Web Search Tool
-- [ ] Markdown Export
-- [ ] PDF Export
-- [ ] Streamlit UI
+- Export reports as PDF
+- Support multiple LLM providers
+- Add citation generation
+- Multi-language report generation
+- Research history
+- Real-time progress tracking
 
 ---
 
-# 🎯 Learning Outcomes
+## 📸 Screenshots
 
-This project demonstrates:
+### Home Screen
 
-- Agentic AI Development
-- CrewAI Framework
-- LLM Integration
-- Multi-Agent Architecture
-- AI Workflow Design
-- Modular Python Project Structure
-- Git & GitHub Workflow
-- API Integration
-- Prompt Engineering
+![Home](images/home.png)
 
----
+### AI Agents Working
 
-# 👩‍💻 Author
+![Processing](images/processing.png)
 
-**Navya Annavarapu**
+### Output 
+![output after processing](images/output.png)
+### Generated Report
 
-B.Tech Computer Science Engineering
-
-Passionate about Artificial Intelligence, Machine Learning, Data Science, and Agentic AI.
-
-GitHub:
-https://github.com/annavarapunavya
+![Report](images/report.png)
 
 ---
 
-# ⭐ Future Scope
+## 📄 License
 
-This project will evolve into a complete **Multi-Agent Research Assistant** capable of:
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-- Researching any topic
-- Searching the web
-- Verifying facts
-- Writing professional reports
-- Exporting reports as PDF
-- Providing an interactive web interface
-- Demonstrating real-world Agentic AI collaboration
+## 👨‍💻 Author
+
+**Annavarapu Navya**
+
+B.Tech | AI & Machine Learning Enthusiast

@@ -16,8 +16,8 @@ def create_writer_agent(llm):
             "easy-to-understand documentation. "
             "Your reports are logical, concise, and readable."
         ),
+        max_execution_time=300,
 
         llm=llm,
-
         verbose=True
     )

@@ -11,6 +11,7 @@ def create_research_agent(llm):
     "identifying key insights, and presenting findings in a clear, structured, "
     "and unbiased manner."),
     llm = llm,
+    max_execution_time = 300,
     #tools=[search_tool],
     verbose = True
     )

@@ -16,7 +16,7 @@ def create_fact_checker_agent(llm):
             "documents, detect inaccurate or misleading statements, and "
             "provide constructive feedback to improve reliability."
         ),
-
+        max_execution_time=300,
         llm=llm,
         verbose=True
     )
