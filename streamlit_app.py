@@ -151,66 +151,37 @@ if generate:
         st.warning("Please enter a research topic.")
         st.stop()
 
-    start = time.time()
+    ...
 
-    progress = st.progress(0)
-    status = st.empty()
+    result, output_path = run_research(topic)
 
-    status.info("🔍 Research Agent is collecting information...")
-    progress.progress(20)
-
-    with st.spinner("Generating research report..."):
-        result, output_path = run_research(topic)
-
-    status.info("✍️ Writer Agent is preparing the report...")
-    progress.progress(60)
-    time.sleep(0.8)
-
-    status.info("✔️ Fact Checker is verifying the report...")
-    progress.progress(90)
-    time.sleep(0.8)
-
-    progress.progress(100)
-    status.success("✅ Research Report Generated Successfully!")
-
-    execution = round(time.time() - start, 2)
-
-    st.write("")
-
-    m1,m2,m3,m4 = st.columns(4)
-    m1.metric("📌 Topic", topic)
-    m2.metric("🤖 Agents", "3")
-    m3.metric("⏱ Time", f"{execution}s")
-    m4.metric("✅ Status", "Completed")
+    ...
 
     st.markdown("---")
 
-with st.expander("📄 View Generated Report", expanded=True):
-    st.markdown(result)
+    with st.expander("📄 View Generated Report", expanded=True):
+        st.markdown(result)
 
-with open(output_path, "r", encoding="utf-8") as f:
-    report = f.read()
+    with open(output_path, "r", encoding="utf-8") as f:
+        report = f.read()
 
-# Generate PDF
-pdf_path = "research_report.pdf"
-create_pdf(report, pdf_path)
+    pdf_path = "research_report.pdf"
+    create_pdf(report, pdf_path)
 
-# Markdown Download
-st.download_button(
-    "⬇️ Download Markdown Report",
-    data=report,
-    file_name="research_report.md",
-    mime="text/markdown"
-)
-
-# PDF Download
-with open(pdf_path, "rb") as pdf_file:
     st.download_button(
-        "📄 Download PDF Report",
-        data=pdf_file.read(),
-        file_name="research_report.pdf",
-        mime="application/pdf"
+        "⬇️ Download Markdown Report",
+        data=report,
+        file_name="research_report.md",
+        mime="text/markdown"
     )
+
+    with open(pdf_path, "rb") as pdf_file:
+        st.download_button(
+            "📄 Download PDF Report",
+            data=pdf_file.read(),
+            file_name="research_report.pdf",
+            mime="application/pdf"
+        )
 
 st.markdown("---")
 st.caption("© 2026 AI Multi-Agent Research System | Built with CrewAI • Gemini • Streamlit")
