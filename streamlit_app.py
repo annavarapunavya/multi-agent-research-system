@@ -7,6 +7,7 @@ import streamlit as st
 from app import run_research
 import time
 from datetime import datetime
+from utils.pdf_generator import create_pdf
 
 st.set_page_config(
     page_title="AI Multi-Agent Research System",
@@ -184,17 +185,31 @@ if generate:
 
     st.markdown("---")
 
-    with st.expander("📄 View Generated Report", expanded=True):
-        st.write(result)
+with st.expander("📄 View Generated Report", expanded=True):
+    st.markdown(result)
 
-    with open(output_path,"r",encoding="utf-8") as f:
-        report = f.read()
+with open(output_path, "r", encoding="utf-8") as f:
+    report = f.read()
 
+# Generate PDF
+pdf_path = "research_report.pdf"
+create_pdf(report, pdf_path)
+
+# Markdown Download
+st.download_button(
+    "⬇️ Download Markdown Report",
+    data=report,
+    file_name="research_report.md",
+    mime="text/markdown"
+)
+
+# PDF Download
+with open(pdf_path, "rb") as pdf_file:
     st.download_button(
-        "⬇ Download Markdown Report",
-        report,
-        file_name="research_report.md",
-        mime="text/markdown"
+        "📄 Download PDF Report",
+        data=pdf_file.read(),
+        file_name="research_report.pdf",
+        mime="application/pdf"
     )
 
 st.markdown("---")
