@@ -63,10 +63,11 @@ def run_research(topic):
     # Execute Crew
     result = crew.kickoff()
 
+    report = result.raw
     # Save report
-    output_path = save_report(topic, result)
+    output_path = save_report(topic, report)
 
-    return result, output_path
+    return report, output_path
 
 if __name__ == "__main__":
 

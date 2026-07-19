@@ -160,6 +160,8 @@ if generate:
 
     with st.spinner("Generating research report..."):
         result, output_path = run_research(topic)
+    st.write(type(result))
+    st.write(result[:300])
 
     status.info("✍️ Writer Agent is preparing the report...")
     progress.progress(60)
