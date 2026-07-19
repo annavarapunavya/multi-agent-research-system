@@ -160,8 +160,6 @@ if generate:
 
     with st.spinner("Generating research report..."):
         result, output_path = run_research(topic)
-    st.write(type(result))
-    st.write(result[:300])
 
     status.info("✍️ Writer Agent is preparing the report...")
     progress.progress(60)
@@ -187,7 +185,7 @@ if generate:
     st.markdown("---")
 
     with st.expander("📄 View Generated Report", expanded=True):
-        st.markdown(result)
+        st.write(result)
 
     with open(output_path,"r",encoding="utf-8") as f:
         report = f.read()

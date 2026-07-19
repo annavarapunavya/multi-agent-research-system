@@ -61,11 +61,17 @@ def run_research(topic):
     )
 
     # Execute Crew
+    print("Starting crew...")
     result = crew.kickoff()
+    print("Crew finished!")
 
     report = result.raw
+    print("Report extracted!")
+    
     # Save report
     output_path = save_report(topic, report)
+    print("Report saved!")
+
 
     return report, output_path
 
