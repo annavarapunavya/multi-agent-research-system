@@ -206,13 +206,17 @@ python -m streamlit run streamlit_app.py
 
 ### AI Agents Working
 
-![Processing](images/processing).png)
+![Processing](images/processing.png)
 
 ### Output 
 ![output after processing](images/output.png)
 ### Generated Report
 
 ![Report](images/report.png)
+### PDF Download of Generated report
+
+![Download Feature](images/Download_feature.png)
+
 
 ---
 

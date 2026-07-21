@@ -10,6 +10,8 @@ def create_pdf(report_text, output_path):
     story = []
 
     for line in report_text.split("\n"):
-        story.append(Paragraph(line.replace(" ", "&nbsp;"), styles["BodyText"]))
+
+        if line.strip():
+            story.append(Paragraph(line, styles["BodyText"]))
 
     doc.build(story)

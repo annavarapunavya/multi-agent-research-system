@@ -8,6 +8,8 @@ from app import run_research
 import time
 from datetime import datetime
 from utils.pdf_generator import create_pdf
+import os
+from datetime import datetime
 
 st.set_page_config(
     page_title="AI Multi-Agent Research System",
@@ -151,11 +153,32 @@ if generate:
         st.warning("Please enter a research topic.")
         st.stop()
 
-    ...
+    start = time.time()
 
-    result, output_path = run_research(topic)
+    with st.status("🤖 AI Agents are generating your research report...", expanded=True) as status:
 
-    ...
+        st.write("🔍 Research Agent is gathering information...")
+
+        result, output_path = run_research(topic)
+
+        st.write("✍️ Writer Agent has created the report.")
+        st.write("✔️ Fact Checker has verified the report.")
+
+        status.update(
+            label="✅ Research Report Generated Successfully!",
+            state="complete"
+        )
+
+    execution = round(time.time() - start, 2)
+
+    st.markdown("---")
+
+    m1, m2, m3, m4 = st.columns(4)
+
+    m1.metric("📌 Topic", topic)
+    m2.metric("🤖 Agents", "3")
+    m3.metric("⏱ Time", f"{execution}s")
+    m4.metric("✅ Status", "Completed")
 
     st.markdown("---")
 
@@ -165,9 +188,14 @@ if generate:
     with open(output_path, "r", encoding="utf-8") as f:
         report = f.read()
 
-    pdf_path = "research_report.pdf"
+    os.makedirs("reports", exist_ok=True)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    safe_topic = topic.replace(" ", "_")
+    pdf_path = os.path.join(
+        "reports",
+        f"{safe_topic}_{timestamp}.pdf"
+    )
     create_pdf(report, pdf_path)
-
     st.download_button(
         "⬇️ Download Markdown Report",
         data=report,
